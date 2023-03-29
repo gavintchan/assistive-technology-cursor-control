@@ -1,11 +1,28 @@
+import time
+start_time = time.time()
+step_time = start_time
+
+def print_times(process, last_step_time):
+    curr_time = time.time()
+    # print(f'{process} - Total: {curr_time - start_time}')
+    print(f'{process} - Step: {curr_time - last_step_time}')
+    # print()
+    return curr_time
+
+step_time = print_times('Start', step_time)
 import mediapipe as mp
+step_time = print_times('Mediapipe', step_time)
 import numpy as np
+step_time = print_times('Numpy', step_time)
 import cv2
+step_time = print_times('cv2', step_time)
 import pyautogui
+step_time = print_times('pyautogui', step_time)
 from pynput import keyboard
 from pynput.keyboard import Controller, Key
+step_time = print_times('pynput', step_time)
 import one_euro_filter
-
+step_time = print_times('one_euro_filter', step_time)
 import collections
 import time
 import os
@@ -14,6 +31,9 @@ import re
 import alignment
 import util
 import sys
+
+step_time = print_times('collections, time, os, re, alignment, util, sys', step_time)
+
 sys.path.insert(0, './emnist_model/')
 
 import torch
@@ -21,6 +41,8 @@ import pytorch_model_class
 from pytorch_model_class import DEVICE
 
 import keyboard_util
+
+step_time = print_times('torch, keyboard_util', step_time)
 
 def load_temp():
     confident_col = np.ones((21,1))
@@ -104,6 +126,8 @@ def get_filtered_center(center, t):
     y_center = y_filter(t, center[1])
     return [x_center, y_center]
 
+step_time = print_times('Loaded functions', step_time)
+
 
 # mediapipe setup
 mp_drawing, mp_drawing_styles = util.mediapipe_draw_setup()
@@ -179,6 +203,8 @@ win_name = "Mouse/Keyboard Controller"
 # cv2.namedWindow(win_name, cv2.WND_PROP_ASPECT_RATIO)
 cv2.imshow(win_name, image)
 cv2.setWindowProperty(win_name, cv2.WND_PROP_TOPMOST, 1)
+
+step_time = print_times('Setup complete', step_time)
 
 while cap.isOpened():
     # get tick count for measuring latency
